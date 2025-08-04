@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BattleZone - Free Fire Tournaments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B00; /* BattleZone orange */
+            --secondary: #0F1923; /* Dark blue */
+            --accent: #FFD700; /* Gold */
+            --text: #FFFFFF;
+            --background: #0A0E13;
+            --card-bg: #1A222C;
+            --border: #334155;
+            --error: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(10, 14, 19, 0.95), rgba(10, 14, 19, 0.95)), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(15, 25, 35, 0.9);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #E05A00;
+            transform: translateY(-3px);
+        }
+
+        /* Auth Container */
+        .auth-container {
+            background-color: rgba(26, 34, 44, 0.9);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin: 2rem auto;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-header {
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .auth-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-content {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            color: var(--text);
+            padding-right: 40px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .btn-auth {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-auth:hover {
+            background-color: #E05A00;
+        }
+
+        .form-footer {
+            margin-top: 1rem;
+            text-align: center;
+            color: #AAAAAA;
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-content a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .footer-content a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: #AAAAAA;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .auth-container {
+                margin: 1rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+   
+
+    <!-- Auth Container -->
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2 id="welcomeTitle">Welcome Back!</h2>
+                <p id="welcomeSubtitle">Please enter your details to login</p>
+            </div>
+            
+            <div class="auth-content">
+                <!-- Login Form -->
+                <form id="loginForm" action="index.html">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle" id="loginPasswordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-auth">Login</button>
+                    
+                    <div class="form-footer">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    <div class="form-footer">
+                        Not a member? <a href="#" id="showRegister">Sign up now</a>
+                    </div>
+                </form>
+
+                <!-- Register Form (Hidden by default) -->
+                <form id="registerForm" style="display: none;">
+                    <div class="form-group">
+                        <label for="registerName">Full In-Game Name</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="registerName" class="form-control" placeholder="Enter your in-game name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerName">In-Game Uid</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="registerName" class="form-control" placeholder="Enter your in-game uid" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="registerEmail" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">Create Password</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="registerPassword" class="form-control" placeholder="Create a password" required>
+                            <button type="button" class="password-toggle" id="registerPasswordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                   
+                    
+                    <button type="submit" class="btn-auth">Create Account</button>
+                    
+                    <div class="form-footer">
+                        Already have an account? <a href="#" id="showLogin">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+   
+ 
+
+    <script>
+        // DOM Elements
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const welcomeTitle = document.getElementById('welcomeTitle');
+        const welcomeSubtitle = document.getElementById('welcomeSubtitle');
+
+        // Toggle between forms
+        showRegister.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            welcomeTitle.textContent = 'Welcome!';
+            welcomeSubtitle.textContent = 'Please enter your details to signup';
+        });
+
+        showLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            welcomeTitle.textContent = 'Welcome Back!';
+            welcomeSubtitle.textContent = 'Please enter your details to login';
+        });
+
+        // Password toggle functionality
+        function setupPasswordToggle(toggleId, inputId) {
+            const toggle = document.getElementById(toggleId);
+            const input = document.getElementById(inputId);
+            const icon = toggle.querySelector('i');
+            
+            toggle.addEventListener('click', function() {
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        }
+
+        // Initialize password toggles
+        setupPasswordToggle('loginPasswordToggle', 'loginPassword');
+        setupPasswordToggle('registerPasswordToggle', 'registerPassword');
+        setupPasswordToggle('registerConfirmPasswordToggle', 'registerConfirmPassword');
+
+        // Form submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Login successful! Redirecting to dashboard...');
+            // Add your login logic here
+        });
+
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Account created successfully! Please login.');
+            registerForm.reset();
+            showLogin.click();
+            // Add your registration logic here
+        });
+    </script>
+</body>
+</html>
